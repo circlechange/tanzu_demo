@@ -20,13 +20,15 @@ echo "Hello Create Cluster Task Script"
 echo "pinging"
 ping -c 3 www.vmware.com
 
-echo "install apt-utils"
-apt -y install apt-utils
+#echo "install apt-utils"
+#apt -y install apt-utils
 
 echo "install ping"
 apt -y install iputils-ping
 
-echo "pinging again after installation"
-ping -c 3 www.vmware.com
+echo "AFTER PING INSTALLATION"
+
+#echo "pinging again after installation"
+#ping -c 3 www.vmware.com
 
 
