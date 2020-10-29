@@ -21,5 +21,5 @@ echo "pinging"
 ping -c 3 www.vmware.com
 
 echo "install ping"
-apt install iputils-ping
+apt -y install iputils-ping
 
