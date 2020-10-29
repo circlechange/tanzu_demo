@@ -6,6 +6,7 @@ inputs:
   - name: resource-app
     path: gopath/src/github.com/cloudfoundry-community/simple-go-web-app
   - name: resource-tanzu
+  - name: work-image
 
 run:
   path: resource-tanzu/pipeline_create_cluster_test/deploy_logs_task.sh

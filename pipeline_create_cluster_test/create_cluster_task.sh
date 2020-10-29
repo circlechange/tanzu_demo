@@ -23,3 +23,7 @@ ping -c 3 www.vmware.com
 echo "install ping"
 apt -y install iputils-ping
 
+echo "pinging again after installation"
+ping -c 3 www.vmware.com
+
+
