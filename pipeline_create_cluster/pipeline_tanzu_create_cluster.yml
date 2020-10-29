@@ -21,18 +21,6 @@ jobs:
   - name: job-create-cluster
     public: true
     plan:
-      - get: resource-tutorial
-      - get: resource-app
-      - get: resource-tanzu
-        trigger: true
-      - task: web-app-tests
-        file: resource-tutorial/tutorials/basic/job-inputs/task_run_tests.yml
-      - task: deploy-app
-        file: resource-tanzu/tanzu_clusters/.yml
-
-  - name: job-create-cluster
-    public: true
-    plan:
     - get: resource-tutorial
     - get: resource-app
     - get: resource-tanzu
