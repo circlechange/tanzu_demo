@@ -14,8 +14,7 @@ resources:
   - name: work-image
     type: registry-image
     source:
-      repository: circlechange
-      tag: ubuntu_tanzu
+      repository: circlechange/ubuntu_tanzu
 
   - name: resource-tanzu
     type: git
@@ -49,7 +48,7 @@ jobs:
       passed: [job-create-cluster]
       trigger: true
     - task: deploy-monitor
-      file: resource-tanzu/pipeline_create_cluster_test/create_cluster_task.yml
+      file: resource-tanzu/pipeline_create_cluster_test/deploy_monitor_task.yml
       image: work-image
 
   - name: job-deploy-logs
@@ -63,7 +62,7 @@ jobs:
       passed: [job-deploy-monitor]
       trigger: true
     - task: deploy-logs
-      file: resource-tanzu/pipeline_create_cluster_test/create_cluster_task.yml
+      file: resource-tanzu/pipeline_create_cluster_test/deploy_logs_task.yml
       image: work-image
 
   - name: job-deploy-velero

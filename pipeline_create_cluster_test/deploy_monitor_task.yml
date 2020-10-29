@@ -1,0 +1,11 @@
+---
+platform: linux
+
+inputs:
+  - name: resource-tutorial
+  - name: resource-app
+    path: gopath/src/github.com/cloudfoundry-community/simple-go-web-app
+  - name: resource-tanzu
+
+run:
+  path: resource-tanzu/pipeline_create_cluster_test/deploy_monitor_task.sh
