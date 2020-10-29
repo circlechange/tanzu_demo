@@ -27,6 +27,8 @@ jobs:
         trigger: true
       - task: web-app-tests
         file: resource-tutorial/tutorials/basic/job-inputs/task_run_tests.yml
+      - task: deploy-app
+        file: resource-tanzu/pipeline_deploy_app/deploy_app_task.yml
 
   - name: job-build-app
     public: true
