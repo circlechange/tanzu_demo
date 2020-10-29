@@ -28,7 +28,7 @@ jobs:
       - task: web-app-tests
         file: resource-tutorial/tutorials/basic/job-inputs/task_run_tests.yml
       - task: deploy-app
-        file: resource-tanzu/pipeline/deploy_app_task.yml
+        file: resource-tanzu/pipeline_deploy_app/deploy_app_task.yml
 
   - name: job-update-test
     public: true
@@ -47,7 +47,7 @@ jobs:
         inputs:
         - name: resource-tanzu
         run:
-          path: resource-tanzu/tanzu_clusters/deploy_app_task.sh
+          path: resource-tanzu/pipeline_update_cluster/update_cluster_task.sh
 
   - name: job-update-conformance
     public: true
@@ -66,4 +66,4 @@ jobs:
         inputs:
         - name: resource-tanzu
         run:
-          path: resource-tanzu/pipeline_update_cluster/deploy_app_task.sh
+          path: resource-tanzu/pipeline_update_cluster/update_cluster_task.sh
