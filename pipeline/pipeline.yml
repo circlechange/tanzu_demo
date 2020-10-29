@@ -37,6 +37,7 @@ jobs:
     - get: resource-tutorial
     - get: resource-app
       passed: [job-test-app]
+      trigger: true
     - get: resource-tanzu
     - task: deploy-app
       file: resource-tanzu/pipeline/deploy_app_task.yml
