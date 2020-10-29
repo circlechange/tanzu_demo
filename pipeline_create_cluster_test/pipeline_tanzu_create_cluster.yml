@@ -30,8 +30,8 @@ jobs:
       - get: resource-tutorial
       - get: resource-app
       - get: resource-tanzu
-      - get: work-image
         trigger: true
+      - get: work-image
       - task: web-app-tests
         file: resource-tutorial/tutorials/basic/job-inputs/task_run_tests.yml
       - task: create-cluster
