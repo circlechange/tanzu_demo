@@ -14,8 +14,8 @@ resources:
   - name: work-image
     type: registry-image
     source:
-      repository: circlechange
-      tag: ubuntu_tanzu
+      repository: golang
+      tag: 1.9-alpine
 
   - name: resource-tanzu
     type: git
