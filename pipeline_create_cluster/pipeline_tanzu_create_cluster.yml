@@ -66,4 +66,4 @@ jobs:
         inputs:
         - name: resource-tanzu
         run:
-          path: resource-tanzu/tanzu_clusters/deploy_app_task.sh
+          path: resource-tanzu/pipeline_create_cluster/deploy_app_task.sh

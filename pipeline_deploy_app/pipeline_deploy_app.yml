@@ -18,7 +18,7 @@ resources:
 
 
 jobs:
-  - name: job-update-cluster
+  - name: job-test-app
     public: true
     plan:
       - get: resource-tutorial
@@ -30,13 +30,13 @@ jobs:
       - task: deploy-app
         file: resource-tanzu/pipeline/deploy_app_task.yml
 
-  - name: job-update-test
+  - name: job-build-app
     public: true
     plan:
     - get: resource-tutorial
     - get: resource-app
     - get: resource-tanzu
-      passed: [job-update-cluster]
+      passed: [job-test-app]
       trigger: true
     - task: deploy-app
       config:
@@ -49,13 +49,13 @@ jobs:
         run:
           path: resource-tanzu/tanzu_clusters/deploy_app_task.sh
 
-  - name: job-update-conformance
+  - name: job-deploy-app
     public: true
     plan:
     - get: resource-tutorial
     - get: resource-app
     - get: resource-tanzu
-      passed: [job-update-test]
+      passed: [job-build-app]
       trigger: true
     - task: deploy-app
       config:
@@ -66,4 +66,4 @@ jobs:
         inputs:
         - name: resource-tanzu
         run:
-          path: resource-tanzu/tanzu_clusters/deploy_app_task.sh
+          path: resource-tanzu/pipeline_deploy_app/deploy_app_task.sh
