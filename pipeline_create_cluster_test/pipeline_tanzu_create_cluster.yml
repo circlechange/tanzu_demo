@@ -44,8 +44,7 @@ jobs:
     - get: resource-tutorial
     - get: resource-app
     - get: work-image
-      passed:
-      - job-create-cluster
+      passed: [job-create-cluster]
     - get: resource-tanzu
       passed: [job-create-cluster]
       trigger: true
@@ -59,11 +58,9 @@ jobs:
     - get: resource-tutorial
     - get: resource-app
     - get: work-image
-      passed:
-      - job-deploy-monitor
+      passed: [job-deploy-monitor]
     - get: resource-tanzu
-      passed:
-      - job-deploy-monitor
+      passed: [job-deploy-monitor]
       trigger: true
     - task: deploy-logs
       file: resource-tanzu/pipeline_create_cluster_test/create_cluster_task.yml
@@ -74,12 +71,8 @@ jobs:
     plan:
     - get: resource-tutorial
     - get: resource-app
-    - get: work-image
-      passed:
-      - job-deploy-logs 
     - get: resource-tanzu
-      passed:
-      - job-deploy-logs
+      passed: [job-deploy-logs]
       trigger: true
     - task: deploy-velero
       config:
