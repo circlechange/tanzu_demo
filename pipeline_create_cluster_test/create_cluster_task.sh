@@ -15,5 +15,11 @@
 
 # kubectl apply -f 
 
-
 echo "Hello Create Cluster Task Script"
+
+echo "pinging"
+ping -c 3 www.vmware.com
+
+echo "install ping"
+apt install iputils-ping
+
