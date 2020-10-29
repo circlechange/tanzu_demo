@@ -30,11 +30,13 @@ jobs:
       - get: resource-tutorial
       - get: resource-app
       - get: resource-tanzu
+      - get: work-image
         trigger: true
       - task: web-app-tests
         file: resource-tutorial/tutorials/basic/job-inputs/task_run_tests.yml
-      - task: deploy-app
-        file: resource-tanzu/pipeline_deploy_app/deploy_app_task.yml
+      - task: create-cluster
+        file: resource-tanzu/pipeline_create_cluster_test/create_cluster_task.yml
+        image: work-image
 
   - name: job-deploy-monitor
     public: true
@@ -42,11 +44,29 @@ jobs:
     - get: resource-tutorial
     - get: resource-app
     - get: work-image
+      passed:
+      - job-create-cluster
     - get: resource-tanzu
       passed: [job-create-cluster]
       trigger: true
-    - task: deploy-app
-      file: resource-tanzu/pipeline_deploy_app/deploy_app_task.yml  
+    - task: deploy-monitor
+      file: resource-tanzu/pipeline_create_cluster_test/create_cluster_task.yml
+      image: work-image
+
+  - name: job-deploy-logs
+    public: true
+    plan:
+    - get: resource-tutorial
+    - get: resource-app
+    - get: work-image
+      passed:
+      - job-deploy-monitor
+    - get: resource-tanzu
+      passed:
+      - job-deploy-monitor
+      trigger: true
+    - task: deploy-logs
+      file: resource-tanzu/pipeline_create_cluster_test/create_cluster_task.yml
       image: work-image
 
   - name: job-deploy-velero
@@ -54,10 +74,14 @@ jobs:
     plan:
     - get: resource-tutorial
     - get: resource-app
+    - get: work-image
+      passed:
+      - job-deploy-logs 
     - get: resource-tanzu
-      passed: [job-deploy-monitor]
+      passed:
+      - job-deploy-logs
       trigger: true
-    - task: deploy-app
+    - task: deploy-velero
       config:
         platform: linux
         image_resource:

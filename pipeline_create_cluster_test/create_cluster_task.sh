@@ -13,7 +13,7 @@
 
 
 
-kubectl apply -f 
+# kubectl apply -f 
 
 
 echo "Hello Create Cluster Task Script"
