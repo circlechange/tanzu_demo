@@ -1,0 +1,9 @@
+---
+inputs:
+  - name: resource-tutorial
+  - name: resource-app
+    path: gopath/src/github.com/cloudfoundry-community/simple-go-web-app
+  - name: resource-tanzu
+
+run:
+  path: resource-tanzu/pipeline_deploy_app/deploy_app_task.sh

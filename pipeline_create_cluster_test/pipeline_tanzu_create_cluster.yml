@@ -11,6 +11,12 @@ resources:
     source:
       uri: https://github.com/cloudfoundry-community/simple-go-web-app.git
 
+  - name: work-image
+    type: registry-image
+    source:
+      repository: golang
+      tag: 1.9-alpine
+
   - name: resource-tanzu
     type: git
     source:
@@ -28,45 +34,20 @@ jobs:
       - task: web-app-tests
         file: resource-tutorial/tutorials/basic/job-inputs/task_run_tests.yml
       - task: deploy-app
-        file: resource-tanzu/tanzu_clusters/.yml
-
-  - name: job-create-cluster
-    public: true
-    plan:
-    - get: resource-tutorial
-    - get: resource-app
-    - get: resource-tanzu
-      trigger: true
-    - task: create-cluster
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source: {repository: golang, tag: 1.9-alpine}
-        inputs:
-        - name: resource-tanzu
-        run:
-          path: resource-tanzu/tanzu_clusters/apply_manifest.sh
-      
+        file: resource-tanzu/pipeline_deploy_app/deploy_app_task.yml
 
   - name: job-deploy-monitor
     public: true
     plan:
     - get: resource-tutorial
     - get: resource-app
+    - get: work-image
     - get: resource-tanzu
       passed: [job-create-cluster]
       trigger: true
     - task: deploy-app
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source: {repository: golang, tag: 1.9-alpine}
-        inputs:
-        - name: resource-tanzu
-        run:
-          path: resource-tanzu/pipeline_create_cluster/create_cluster_task.sh
+      file: resource-tanzu/pipeline_deploy_app/deploy_app_task.yml  
+      image: work-image
 
   - name: job-deploy-velero
     public: true

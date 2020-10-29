@@ -1,0 +1,26 @@
+
+apiVersion: run.tanzu.vmware.com/v1alpha1
+kind: TanzuKubernetesCluster
+metadata:
+    name: tanzu-cluster-03
+    namespace: tanzu-demo-pipeline
+spec:
+   topology:
+       controlPlane:
+           count: 3
+           class: best-effort-xsmall
+           storageClass: 01-platinum
+       workers:
+           count: 3
+           class: best-effort-xsmall
+           storageClass: 01-platinum
+   distribution:
+        version: v1.16.12
+   settings:
+        network:
+          cni:
+              name: calico
+          services:
+             cidrBlocks: ["198.51.100.0/12"]
+          pods:
+             cidrBlocks: ["192.0.2.0/16"]
