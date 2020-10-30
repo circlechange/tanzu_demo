@@ -17,23 +17,26 @@
 
 echo "Hello Create Cluster Task Script"
 
-echo "whoami"
+echo "¥n¥nwhoami"
 whoami
 
-echo "echoing MYNAME"
+echo "¥n¥nCheck directory"
+ls -al
+
+echo "¥n¥nechoing MYNAME"
 echo $MYNAME
 
-echo "exporting MYNAME as AKIRA"
+echo "¥n¥nexporting MYNAME as AKIRA"
 export MYNAME=AKIRA
 
-echo "echoing MYNAME again"
+echo "¥n¥nechoing MYNAME again"
 echo $MYNAME
 
-echo "calling kubectl info"
+echo "¥n¥ncalling kubectl info"
 kubectl --help
 
-echo "calling kubectl vsphere login"
-kubectl vsphere login
+echo "¥n¥ncalling kubectl vsphere login"
+kubectl vsphere login --help
 
 
 
