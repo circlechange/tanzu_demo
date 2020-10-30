@@ -17,6 +17,9 @@
 
 echo "Hello Create Cluster Task Script"
 
+echo "whoami"
+whoami
+
 echo "echoing MYNAME"
 echo $MYNAME
 
