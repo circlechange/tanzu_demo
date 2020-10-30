@@ -18,5 +18,9 @@
 
 echo "Hello Deploy Monitor Task Script"
 
-echo "pinging"
-ping -c 3 www.vmware.com
+echo "echoing MYNAME"
+echo $MYNAME
+
+
+#echo "pinging"
+#ping -c 3 www.vmware.com

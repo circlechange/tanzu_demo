@@ -17,16 +17,28 @@
 
 echo "Hello Create Cluster Task Script"
 
-echo "pinging"
-ping -c 3 www.vmware.com
+echo "echoing MYNAME"
+echo $MYNAME
+
+echo "exporting MYNAME as AKIRA"
+export MYNAME=AKIRA
+
+echo "echoing MYNAME again"
+echo $MYNAME
+
+
+
+
+#echo "pinging"
+#ping -c 3 www.vmware.com
 
 #echo "install apt-utils"
 #apt -y install apt-utils
 
-echo "install ping"
-apt -y install iputils-ping
+#echo "install ping"
+#apt -y install iputils-ping
 
-echo "AFTER PING INSTALLATION"
+#echo "AFTER PING INSTALLATION"
 
 #echo "pinging again after installation"
 #ping -c 3 www.vmware.com
