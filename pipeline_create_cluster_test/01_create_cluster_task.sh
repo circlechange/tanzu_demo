@@ -26,7 +26,8 @@ export MYNAME=AKIRA
 echo "echoing MYNAME again"
 echo $MYNAME
 
-
+echo "calling kubectl info"
+kubeclt info
 
 
 #echo "pinging"

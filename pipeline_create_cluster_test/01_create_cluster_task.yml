@@ -9,4 +9,4 @@ inputs:
   - name: work-image
 
 run:
-  path: resource-tanzu/pipeline_create_cluster_test/deploy_monitor_task.sh
+  path: resource-tanzu/pipeline_create_cluster_test/01_create_cluster_task.sh

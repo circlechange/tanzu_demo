@@ -34,7 +34,7 @@ jobs:
       - task: web-app-tests
         file: resource-tutorial/tutorials/basic/job-inputs/task_run_tests.yml
       - task: create-cluster
-        file: resource-tanzu/pipeline_create_cluster_test/create_cluster_task.yml
+        file: resource-tanzu/pipeline_create_cluster_test/01_create_cluster_task.yml
         image: work-image
 
   - name: job-deploy-monitor
@@ -48,7 +48,7 @@ jobs:
       passed: [job-create-cluster]
       trigger: true
     - task: deploy-monitor
-      file: resource-tanzu/pipeline_create_cluster_test/deploy_monitor_task.yml
+      file: resource-tanzu/pipeline_create_cluster_test/02_deploy_monitor_task.yml
       image: work-image
 
   - name: job-deploy-logs
@@ -62,7 +62,7 @@ jobs:
       passed: [job-deploy-monitor]
       trigger: true
     - task: deploy-logs
-      file: resource-tanzu/pipeline_create_cluster_test/deploy_logs_task.yml
+      file: resource-tanzu/pipeline_create_cluster_test/03_deploy_logs_task.yml
       image: work-image
 
   - name: job-deploy-velero
