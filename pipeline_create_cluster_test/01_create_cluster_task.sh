@@ -30,7 +30,12 @@ echo "echoing MYNAME again"
 echo $MYNAME
 
 echo "calling kubectl info"
-kubeclt info
+kubectl --help
+
+echo "calling kubectl vsphere login"
+kubectl vsphere login
+
+
 
 
 #echo "pinging"
