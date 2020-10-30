@@ -20,8 +20,18 @@ echo "Hello Create Cluster Task Script"
 echo "¥n¥nwhoami"
 whoami
 
-echo "¥n¥nCheck directory"
+echo "¥n¥nls -al"
 ls -al
+
+echo "¥n¥nls -al resource-tanzu"
+ls -al resource-tanzu
+
+echo "¥n¥nls -al resource-tutorial"
+ls -al resource-tutorial
+
+echo "¥n¥nls -al work-image"
+ls -al work-image
+
 
 echo "¥n¥nechoing MYNAME"
 echo $MYNAME
