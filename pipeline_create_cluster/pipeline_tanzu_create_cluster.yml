@@ -1,15 +1,9 @@
 ---
 resources:
-  - name: resource-tutorial
-    type: git
+  - name: work-image
+    type: registry-image
     source:
-      uri: https://github.com/starkandwayne/concourse-tutorial.git
-      branch: develop
-
-  - name: resource-app
-    type: git
-    source:
-      uri: https://github.com/cloudfoundry-community/simple-go-web-app.git
+      repository: circlechange/ubuntu_tanzu
 
   - name: resource-tanzu
     type: git
@@ -21,57 +15,45 @@ jobs:
   - name: job-create-cluster
     public: true
     plan:
-    - get: resource-tutorial
-    - get: resource-app
-    - get: resource-tanzu
-      trigger: true
-    - task: create-cluster
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source: {repository: golang, tag: 1.9-alpine}
-        inputs:
-        - name: resource-tanzu
-        run:
-          path: resource-tanzu/tanzu_clusters/apply_manifest.sh
-      
+      - get: resource-tanzu
+        trigger: true
+      - get: work-image
+      - task: create-cluster
+        file: resource-tanzu/pipeline_create_cluster/01_create_cluster_task.yml
+        image: work-image
 
   - name: job-deploy-monitor
     public: true
     plan:
-    - get: resource-tutorial
-    - get: resource-app
+    - get: work-image
+      passed: [job-create-cluster]
     - get: resource-tanzu
       passed: [job-create-cluster]
       trigger: true
-    - task: deploy-app
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source: {repository: golang, tag: 1.9-alpine}
-        inputs:
-        - name: resource-tanzu
-        run:
-          path: resource-tanzu/pipeline_create_cluster/create_cluster_task.sh
+    - task: deploy-monitor
+      file: resource-tanzu/pipeline_create_cluster/02_deploy_monitor_task.yml
+      image: work-image
+
+  - name: job-deploy-logs
+    public: true
+    plan:
+    - get: work-image
+      passed: [job-deploy-monitor]
+    - get: resource-tanzu
+      passed: [job-deploy-monitor]
+      trigger: true
+    - task: deploy-logs
+      file: resource-tanzu/pipeline_create_cluster/03_deploy_logs_task.yml
+      image: work-image
 
   - name: job-deploy-velero
     public: true
     plan:
-    - get: resource-tutorial
-    - get: resource-app
+    - get: work-image
+      passed: [job-deploy-logs]
     - get: resource-tanzu
-      passed: [job-deploy-monitor]
+      passed: [job-deploy-logs]
       trigger: true
-    - task: deploy-app
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source: {repository: golang, tag: 1.9-alpine}
-        inputs:
-        - name: resource-tanzu
-        run:
-          path: resource-tanzu/pipeline_create_cluster/create_cluster_task.sh
-
+    - task: deploy-velero
+      file: resource-tanzu/pipeline_create_cluster/04_deploy_velero_task.yml
+      image: work-image
