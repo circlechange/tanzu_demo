@@ -11,25 +11,25 @@
 
 echo "Hello Create Cluster Task Script"
 
-echo "¥n¥nwhoami"
+echo "\n\nwhoami"
 whoami
 
-echo "¥n¥nls -al"
+echo "\n\nls -al"
 ls -al
 
-echo "¥n¥nls -al resource-tanzu"
+echo "\n\nls -al resource-tanzu"
 ls -al resource-tanzu
 
-echo "¥n¥nls -al work-image"
+echo "\n\nls -al work-image"
 ls -al work-image
 
-echo "¥n¥nechoing MYNAME"
+echo "\n\nechoing MYNAME"
 echo $MYNAME
 
-echo "¥n¥nexporting MYNAME as AKIRA"
+echo "\n\nexporting MYNAME as AKIRA"
 export MYNAME=AKIRA
 
-echo "¥n¥nechoing MYNAME again"
+echo "\n\nechoing MYNAME again"
 echo $MYNAME
 
 # echo "¥n¥ncalling kubectl info"
