@@ -21,6 +21,9 @@ echo "\n\nCheck Directory"
 echo "$ ls -al"
 ls -al
 
+echo "\n\n$ ls -al work-image"
+ls -al work-image
+
 echo "\n\n$ ls -al resource-tanzu"
 ls -al resource-tanzu
 
@@ -30,11 +33,11 @@ ls -al resource-tanzu/tanzu_clusters
 echo "\n\n$ cd resource-tanzu/tanzu_clusters"
 cd resource-tanzu/tanzu_clusters
 
+echo "\n\n$ pwd"
+pwd
+
 echo "\n\n$ ls -al"
 ls -al
-
-echo "\n\n$ ls -al work-image"
-ls -al work-image
 
 
 
@@ -54,7 +57,7 @@ exit 0
 
 # 2. Create TKC
 echo "\n\n$ Create Tanzu Kuberentes Cluster"
-kubectl apply -f resource_tanzu/tanzu_clusters/cluster_manifest_01.yml
+kubectl apply -f cluster_manifest_01.yml
 
 
 
