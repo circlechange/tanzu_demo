@@ -2,7 +2,7 @@
 apiVersion: run.tanzu.vmware.com/v1alpha1
 kind: TanzuKubernetesCluster
 metadata:
-    name: tanzu-cluster-03
+    name: tanzu-cluster-11
     namespace: tanzu-demo-pipeline
 spec:
    topology:

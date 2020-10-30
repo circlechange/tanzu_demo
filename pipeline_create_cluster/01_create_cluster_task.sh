@@ -1,13 +1,13 @@
 #!/bin/sh
 
-# 1. Pipeline 内のシェルの動作を確認
-# 2. Supervisor Cluster にログイン
-# 3. TKC 作成
+# 0. Check some info in Pipeline
+# 1. Login to Supervisor Cluster
+# 2. Create TKC
 
 
 #############
 
-# 1. Pipeline 内のシェルの動作を確認
+# 0. Check some info in Pipeline
 
 echo "Hello Create Cluster Task Script"
 
@@ -24,6 +24,30 @@ ls -al resource-tanzu
 echo "\n\n$ ls -al work-image"
 ls -al work-image
 
+
+
+# 1. Login to Supervisor Cluster
+echo "\n\n$ Login to Tanzu Supervisor Cluster"
+PW="VMware1!"
+
+expect -c "
+set timeout 5
+spawn env LANG=C kubectl vsphere login --vsphere-username administrator@vsphere.local --server=https://172.17.187.129 --insecure-skip-tls-verify
+expect \"Password:\"
+send \"${PW}\n\"
+expect \"$\"
+exit 0
+"
+
+
+# 2. Create TKC
+echo "\n\n$ Create Tanzu Kuberentes Cluster"
+kubectl apply -f resource_tanzu/tanzu_clusters/cluster_manifest_01.yml
+
+
+
+#######
+
 #echo "\n\nechoing MYNAME"
 #echo $MYNAME
 
@@ -38,11 +62,3 @@ ls -al work-image
 
 # echo "¥n¥ncalling kubectl vsphere login"
 # kubectl vsphere login --help
-
-
-# 2. Supervisor Cluster にログイン
-
-
-
-# 3. TKC 作成
-
