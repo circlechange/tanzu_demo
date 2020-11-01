@@ -10,7 +10,6 @@ resources:
     source:
       uri: https://github.com/circlechange/tanzu_demo.git
 
-
 jobs:
   - name: job-create-cluster
     public: true
@@ -26,9 +25,9 @@ jobs:
     public: true
     plan:
     - get: work-image
-      passed: [job-create-cluster]
+      passed: [job-deploy-ingressc]
     - get: resource-tanzu
-      passed: [job-create-cluster]
+      passed: [job-deploy-ingress]
       trigger: true
     - task: deploy-monitor
       file: resource-tanzu/pipeline_create_cluster/02_deploy_monitor_task.yml
