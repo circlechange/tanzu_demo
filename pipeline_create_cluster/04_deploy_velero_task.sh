@@ -7,8 +7,6 @@ echo "Hello Deploy Velero Task Script"
 
 # 0. Check some info in Pipeline
 
-echo "Hello Create Cluster Task Script"
-
 echo "\n\n$ whoami"
 whoami
 

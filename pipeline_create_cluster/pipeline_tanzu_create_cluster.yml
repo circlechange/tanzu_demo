@@ -25,9 +25,9 @@ jobs:
     public: true
     plan:
     - get: work-image
-      passed: [job-deploy-ingressc]
+      passed: [job-create-cluster]
     - get: resource-tanzu
-      passed: [job-deploy-ingress]
+      passed: [job-create-cluster]
       trigger: true
     - task: deploy-monitor
       file: resource-tanzu/pipeline_create_cluster/02_deploy_monitor_task.yml
